@@ -1,5 +1,11 @@
 <?php
 
+namespace DSA\ArrayList;
+
+use InvalidArgumentException;
+use OutOfBoundsException;
+use UnderflowException;
+
 class ArrayList
 {
     private array $data;
