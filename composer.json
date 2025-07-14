@@ -1,0 +1,15 @@
+{
+  "name": "saull/learning",
+  "autoload": {
+    "psr-4": {
+      "Saull\\Learning\\": "DSA/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Saull Brandão",
+      "email": "saull@outlook.com"
+    }
+  ],
+  "require": {}
+}
