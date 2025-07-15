@@ -1,6 +1,6 @@
 package ds;
 
-public class ArrayList {
+public class ArrayList<T> {
     private Object[] data;
     private int size = 0;
     private int capacity = 4;
@@ -26,36 +26,36 @@ public class ArrayList {
         return size == 0;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         checkIndex(index);
 
-        return data[index];
+        return data(index);
     }
 
-    public void set(int index, Object item) {
+    public void set(int index, T item) {
         checkIndex(index);
 
         data[index] = item;
     }
 
-    public void append(Object item) {
+    public void append(T item) {
         ensureCapacity();
 
         data[size++] = item;
     }
 
-    public Object pop() {
+    public T pop() {
         if (isEmpty()) {
             throw new IllegalStateException("Can't pop on an empty ArrayList");
         }
 
-        Object item = data[--size];
+        T item = data(--size);
         data[size] = null;
 
         return item;
     }
 
-    public void insert(int index, Object item) {
+    public void insert(int index, T item) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index);
         }
@@ -71,7 +71,7 @@ public class ArrayList {
         set(index, item);
     }
 
-    public void prepend(Object item) {
+    public void prepend(T item) {
         insert(0, item);
     }
 
@@ -85,7 +85,7 @@ public class ArrayList {
         data[--size] = null;
     }
 
-    public int find(Object item) {
+    public int find(T item) {
         for (int i = 0; i < size; i++) {
             if (data[i] == item) {
                 return i;
@@ -96,7 +96,7 @@ public class ArrayList {
         return -1;
     }
 
-    public void remove(Object item) {
+    public void remove(T item) {
         int index = find(item);
         if (index == -1) {
             throw new IllegalArgumentException("Item not found on the list");
@@ -126,5 +126,10 @@ public class ArrayList {
         }
 
         data = newList;
+    }
+
+    @SuppressWarnings("unchecked")
+    private T data(int index) {
+        return (T) data[index];
     }
 }
