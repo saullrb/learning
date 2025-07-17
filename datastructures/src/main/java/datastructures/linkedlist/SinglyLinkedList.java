@@ -1,4 +1,4 @@
-package ds.linkedlist;
+package datastructures.linkedlist;
 
 import java.security.InvalidParameterException;
 

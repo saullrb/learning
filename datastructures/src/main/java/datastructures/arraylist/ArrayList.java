@@ -1,4 +1,4 @@
-package ds;
+package datastructures.arraylist;
 
 public class ArrayList<T> {
     private Object[] data;

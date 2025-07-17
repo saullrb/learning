@@ -1,7 +1,9 @@
-package ds;
+package datastructures.arraylist;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Stack;
 
 import org.junit.jupiter.api.BeforeEach;
 
@@ -118,5 +120,32 @@ class ArrayListTest {
     @Test
     void testDeleteThrowsOnInvalidIndex() {
         assertThrows(IndexOutOfBoundsException.class, () -> list.delete(0));
+    }
+}
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> operands = new Stack<>();
+
+        for (String token : tokens) {
+            switch (token) {
+                case "+":
+                    operands.push(operands.pop() + operands.pop());
+                    break;
+                case "-":
+                    operands.push(operands.pop() - operands.pop());
+                    break;
+                case "*":
+                    operands.push(operands.pop() * operands.pop());
+                    break;
+                case "/":
+                    operands.push(operands.pop() / operands.pop());
+                    break;
+                default:
+                    operands.push(Integer.getInteger(token));
+            }
+        }
+
+        return operands.pop();
     }
 }
