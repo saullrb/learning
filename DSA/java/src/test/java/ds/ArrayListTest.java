@@ -3,11 +3,19 @@ package ds;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
+
 class ArrayListTest {
+
+    private ArrayList<Integer> list;
+
+    @BeforeEach
+    void setUp() {
+        list = new ArrayList<>();
+    }
 
     @Test
     void testAppendAndGet() {
-        ArrayList list = new ArrayList();
         list.append(1);
         list.append(2);
 
@@ -17,14 +25,12 @@ class ArrayListTest {
 
     @Test
     void testSizeAndCapacity() {
-        ArrayList list = new ArrayList();
         assertEquals(0, list.size());
         assertTrue(list.capacity() >= 4);
     }
 
     @Test
     void testInsertAndPrepend() {
-        ArrayList list = new ArrayList();
         list.append(1);
         list.append(3);
         list.insert(1, 2); // between 1 and 3
@@ -38,31 +44,28 @@ class ArrayListTest {
 
     @Test
     void testDeleteAndRemove() {
-        ArrayList list = new ArrayList();
-        list.append("a");
-        list.append("b");
-        list.append("c");
+        list.append(1);
+        list.append(2);
+        list.append(3);
 
         list.delete(1); // remove "b"
-        assertEquals("a", list.get(0));
-        assertEquals("c", list.get(1));
+        assertEquals(1, list.get(0));
+        assertEquals(3, list.get(1));
         assertEquals(2, list.size());
 
-        list.remove("a");
-        assertEquals("c", list.get(0));
+        list.remove(1);
+        assertEquals(3, list.get(0));
         assertEquals(1, list.size());
     }
 
     @Test
     void testRemoveThrowsIfNotFound() {
-        ArrayList list = new ArrayList();
-        Exception e = assertThrows(IllegalArgumentException.class, () -> list.remove("x"));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> list.remove(1));
         assertTrue(e.getMessage().contains("not found"));
     }
 
     @Test
     void testPop() {
-        ArrayList list = new ArrayList();
         list.append(42);
         Object value = list.pop();
 
@@ -72,23 +75,20 @@ class ArrayListTest {
 
     @Test
     void testPopThrowsIfEmpty() {
-        ArrayList list = new ArrayList();
         assertThrows(IllegalStateException.class, list::pop);
     }
 
     @Test
     void testFind() {
-        ArrayList list = new ArrayList();
-        list.append("x");
-        list.append("y");
+        list.append(1);
+        list.append(2);
 
-        assertEquals(1, list.find("y"));
-        assertEquals(-1, list.find("z"));
+        assertEquals(1, list.find(2));
+        assertEquals(-1, list.find(9));
     }
 
     @Test
     void testResize() {
-        ArrayList list = new ArrayList(2);
         list.append(1);
         list.append(2);
         list.append(3); // triggers resize
@@ -100,7 +100,6 @@ class ArrayListTest {
 
     @Test
     void testSetAndGet() {
-        ArrayList list = new ArrayList();
         list.append(1);
         list.set(0, 10);
         assertEquals(10, list.get(0));
@@ -108,19 +107,16 @@ class ArrayListTest {
 
     @Test
     void testSetThrowsOnInvalidIndex() {
-        ArrayList list = new ArrayList();
-        assertThrows(IndexOutOfBoundsException.class, () -> list.set(0, "fail"));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.set(0, 999));
     }
 
     @Test
     void testGetThrowsOnInvalidIndex() {
-        ArrayList list = new ArrayList();
         assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
     }
 
     @Test
     void testDeleteThrowsOnInvalidIndex() {
-        ArrayList list = new ArrayList();
         assertThrows(IndexOutOfBoundsException.class, () -> list.delete(0));
     }
 }
