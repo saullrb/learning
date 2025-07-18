@@ -23,7 +23,7 @@ class Queue<T> {
     }
 
     public T dequeue() {
-        if (empty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
 
@@ -33,7 +33,7 @@ class Queue<T> {
         return value;
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         return head == null;
     }
 

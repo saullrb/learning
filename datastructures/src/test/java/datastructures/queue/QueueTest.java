@@ -20,13 +20,13 @@ class QueueTest {
     @Test
     void testEmpty() {
         Queue<Integer> q = new Queue<>();
-        assertTrue(q.empty());
+        assertTrue(q.isEmpty());
 
         q.enqueue(1);
-        assertFalse(q.empty());
+        assertFalse(q.isEmpty());
 
         q.dequeue();
-        assertTrue(q.empty());
+        assertTrue(q.isEmpty());
     }
 
     @Test
